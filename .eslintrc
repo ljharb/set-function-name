@@ -1,0 +1,17 @@
+{
+	"root": true,
+
+	//"extends": "@ljharb",
+
+	"overrides": [
+		{
+			"files": ["test/**/*.js"],
+			"extends": "@ljharb/eslint-config/node/4",
+			"rules": {
+				"func-style": "off",
+				"id-length": "off",
+				"no-empty-function": "off",
+			},
+		},
+	],
+}
