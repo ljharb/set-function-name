@@ -1,41 +1,56 @@
 'use strict';
 
-const setFunctionName = require('..');
-const assert = require('assert');
+var test = require('tape');
+var functionsHaveConfigurableNames = require('functions-have-names').functionsHaveConfigurableNames();
+var generators = require('make-generator-function')();
+var arrows = require('make-arrow-function').list();
+var asyncs = require('make-async-function').list();
+var asyncGens = require('make-async-generator-function')();
+var forEach = require('for-each');
+var inspect = require('object-inspect');
+var v = require('es-value-fixtures');
+var functionName = require('function.prototype.name');
 
-function functionDeclaration() {}
-assert.equal(functionDeclaration.name, 'functionDeclaration');
-setFunctionName(functionDeclaration, 'updated declaration');
-assert.equal(functionDeclaration.name, 'updated declaration');
+var setFunctionName = require('../');
 
-const functionExpression = function () {};
-assert.equal(functionExpression.name, 'functionExpression');
-setFunctionName(functionExpression, 'updated expression');
-assert.equal(functionExpression.name, 'updated expression');
+test('set function name', function (t) {
+	forEach(v.nonFunctions, function (nonFunction) {
+		if (nonFunction == null) { // eslint-disable-line eqeqeq
+			t['throws'](
+				function () { setFunctionName(nonFunction); },
+				TypeError,
+				inspect(nonFunction) + ' is not a function'
+			);
+		}
+	});
 
-const functionExpressionArrow = () => {};
-assert.equal(functionExpressionArrow.name, 'functionExpressionArrow');
-setFunctionName(functionExpressionArrow, 'updated arrow');
-assert.equal(functionExpressionArrow.name, 'updated arrow');
+	t.test('setting the name', { skip: !functionsHaveConfigurableNames }, function (st) {
+		var i = 1;
+		forEach([].concat(
+			function () {},
+			function f() {},
+			{ inferred: function () {} }.inferred,
+			arrows,
+			asyncs,
+			generators,
+			asyncGens
+		), function (fn) {
+			var origName = functionName(fn);
+			i += 1;
+			var newName = origName + i;
 
-class Klass {}
-assert.equal(Klass.name, 'Klass');
-setFunctionName(Klass, 'updated class name');
-assert.equal(Klass.name, 'updated class name');
+			var msg = inspect(fn) + ': returns it (' + Function.prototype.toString.call(fn) + ')';
+			st.equal(setFunctionName(fn, newName), fn, msg);
 
-const func = function declaration() {};
-const obj1 = {
-	m1() {},
-	m2() {},
-	['m' + '3']() {}, // eslint-disable-line no-useless-concat
-	func,
-};
-assert.equal(obj1.m1.name, 'm1');
-assert.equal(obj1.m2.name, 'm2');
-assert.equal(obj1.m3.name, 'm3');
-assert.equal(obj1.func.name, 'declaration');
+			st.equal(
+				functionName(fn),
+				newName,
+				inspect(fn) + ': sets the name from ' + inspect(origName) + ' to ' + inspect(newName)
+			);
+		});
 
-assert.equal(setFunctionName(obj1.m1, 'updated m1').name, 'updated m1');
-assert.equal(setFunctionName(obj1.m2, 'updated m2').name, 'updated m2');
-assert.equal(setFunctionName(obj1.m3, 'updated m3').name, 'updated m3');
-assert.equal(setFunctionName(obj1.func, 'updated func').name, 'updated func');
+		st.end();
+	});
+
+	t.end();
+});

@@ -6,10 +6,9 @@
 	"overrides": [
 		{
 			"files": ["test/**/*.js"],
-			"extends": "@ljharb/eslint-config/node/4",
 			"rules": {
-				"func-style": "off",
 				"id-length": "off",
+				"multiline-comment-style": "off",
 				"no-empty-function": "off",
 			},
 		},
