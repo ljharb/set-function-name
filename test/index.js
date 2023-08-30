@@ -15,13 +15,11 @@ var setFunctionName = require('../');
 
 test('set function name', function (t) {
 	forEach(v.nonFunctions, function (nonFunction) {
-		if (nonFunction == null) { // eslint-disable-line eqeqeq
-			t['throws'](
-				function () { setFunctionName(nonFunction); },
-				TypeError,
-				inspect(nonFunction) + ' is not a function'
-			);
-		}
+		t['throws'](
+			function () { setFunctionName(nonFunction); },
+			TypeError,
+			inspect(nonFunction) + ' is not a function'
+		);
 	});
 
 	t.test('setting the name', { skip: !functionsHaveConfigurableNames }, function (st) {
