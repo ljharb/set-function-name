@@ -3,6 +3,10 @@
 
 	"extends": "@ljharb",
 
+	"rules": {
+		"id-length": "off",
+	},
+
 	"overrides": [
 		{
 			"files": ["test/**/*.js"],

@@ -9,6 +9,13 @@
 
 Set a function’s name.
 
+Arguments:
+ - `fn`: the function
+ - `name`: the new name
+ - `loose`: Optional. If true, and the name fails to be set, do not throw. Default false.
+
+Returns `fn`.
+
 ## Usage
 
 ```javascript
@@ -26,10 +33,10 @@ assert.equal(obj.arrow.name, 'arrow');
 assert.equal(obj.named.name, 'named');
 assert.equal(obj.anon.name, 'anon');
 
-setFunctionName(obj.concise, 'brief');
-setFunctionName(obj.arrow, 'pointy');
-setFunctionName(obj.named, '');
-setFunctionName(obj.anon, 'anonymous');
+assert.equal(setFunctionName(obj.concise, 'brief'), obj.concise);
+assert.equal(setFunctionName(obj.arrow, 'pointy'), obj.arrow);
+assert.equal(setFunctionName(obj.named, ''), obj.named);
+assert.equal(setFunctionName(obj.anon, 'anonymous'), obj.anon);
 
 assert.equal(obj.concise.name, 'brief');
 assert.equal(obj.arrow.name, 'pointy');
