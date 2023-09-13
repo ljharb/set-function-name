@@ -45,7 +45,6 @@
 		"evalmd": "^0.0.19",
 		"for-each": "^0.3.3",
 		"function.prototype.name": "^1.1.6",
-		"functions-have-names": "^1.2.3",
 		"in-publish": "^2.0.1",
 		"make-arrow-function": "^1.2.0",
 		"make-async-function": "^1.0.0",
@@ -58,6 +57,7 @@
 	},
 	"dependencies": {
 		"define-data-property": "^1.0.1",
+		"functions-have-names": "^1.2.3",
 		"has-property-descriptors": "^1.0.0"
 	},
 	"engines": {
