@@ -6,6 +6,7 @@ var functionsHaveConfigurableNames = require('functions-have-names').functionsHa
 
 var $TypeError = require('es-errors/type');
 
+/** @type {import('.')} */
 module.exports = function setFunctionName(fn, name) {
 	if (typeof fn !== 'function') {
 		throw new $TypeError('`fn` is not a function');
@@ -13,9 +14,9 @@ module.exports = function setFunctionName(fn, name) {
 	var loose = arguments.length > 2 && !!arguments[2];
 	if (!loose || functionsHaveConfigurableNames) {
 		if (hasDescriptors) {
-			define(fn, 'name', name, true, true);
+			define(/** @type {Parameters<define>[0]} */ (fn), 'name', name, true, true);
 		} else {
-			define(fn, 'name', name);
+			define(/** @type {Parameters<define>[0]} */ (fn), 'name', name);
 		}
 	}
 	return fn;
