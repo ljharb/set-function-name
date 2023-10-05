@@ -16,6 +16,7 @@ var setFunctionName = require('../');
 test('set function name', function (t) {
 	forEach(v.nonFunctions, function (nonFunction) {
 		t['throws'](
+			// @ts-expect-error
 			function () { setFunctionName(nonFunction); },
 			TypeError,
 			inspect(nonFunction) + ' is not a function'
@@ -24,7 +25,7 @@ test('set function name', function (t) {
 
 	t.test('setting the name', { skip: !functionsHaveConfigurableNames }, function (st) {
 		var i = 1;
-		forEach([].concat(
+		forEach(/** @type {Parameters<functionName>[0][]} */ ([]).concat(
 			function () {},
 			function f() {},
 			{ inferred: function () {} }.inferred,
@@ -35,7 +36,7 @@ test('set function name', function (t) {
 		), function (fn) {
 			var origName = functionName(fn);
 			i += 1;
-			var newName = origName + i;
+			var newName = origName + String(i);
 
 			var msg = inspect(fn) + ': returns it (' + Function.prototype.toString.call(fn) + ')';
 			st.equal(setFunctionName(fn, newName), fn, msg);
