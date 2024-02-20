@@ -56,9 +56,9 @@
 		"tape": "^5.7.5"
 	},
 	"dependencies": {
-		"define-data-property": "^1.0.1",
+		"define-data-property": "^1.1.4",
 		"functions-have-names": "^1.2.3",
-		"has-property-descriptors": "^1.0.0"
+		"has-property-descriptors": "^1.0.2"
 	},
 	"engines": {
 		"node": ">= 0.4"
