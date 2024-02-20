@@ -4,7 +4,7 @@ var define = require('define-data-property');
 var hasDescriptors = require('has-property-descriptors')();
 var functionsHaveConfigurableNames = require('functions-have-names').functionsHaveConfigurableNames();
 
-var $TypeError = TypeError;
+var $TypeError = require('es-errors/type');
 
 module.exports = function setFunctionName(fn, name) {
 	if (typeof fn !== 'function') {
