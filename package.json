@@ -40,6 +40,7 @@
 	"homepage": "https://github.com/ljharb/set-function-name#readme",
 	"devDependencies": {
 		"@ljharb/eslint-config": "^21.1.0",
+		"@ljharb/tsconfig": "^0.1.1",
 		"@types/call-bind": "^1.0.5",
 		"@types/define-properties": "^1.1.5",
 		"@types/es-value-fixtures": "^1.4.4",
