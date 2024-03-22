@@ -28,16 +28,20 @@ const obj = {
     named: function named() {},
     anon: function () {},
 };
+
+// These are defaults for modern JS engines:
 assert.equal(obj.concise.name, 'concise');
 assert.equal(obj.arrow.name, 'arrow');
 assert.equal(obj.named.name, 'named');
 assert.equal(obj.anon.name, 'anon');
 
+// Mutate function .name without changing the actual function reference:
 assert.equal(setFunctionName(obj.concise, 'brief'), obj.concise);
 assert.equal(setFunctionName(obj.arrow, 'pointy'), obj.arrow);
 assert.equal(setFunctionName(obj.named, ''), obj.named);
 assert.equal(setFunctionName(obj.anon, 'anonymous'), obj.anon);
 
+// Assert .name properties show new names:
 assert.equal(obj.concise.name, 'brief');
 assert.equal(obj.arrow.name, 'pointy');
 assert.equal(obj.named.name, '');
