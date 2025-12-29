@@ -57,5 +57,5 @@ assert.equal(obj.anon.name, 'anonymous');
 [downloads-url]: https://npm-stat.com/charts.html?package=set-function-name
 [codecov-image]: https://codecov.io/gh/ljharb/set-function-name/branch/main/graphs/badge.svg
 [codecov-url]: https://app.codecov.io/gh/ljharb/set-function-name/
-[actions-image]: https://img.shields.io/endpoint?url=https://github-actions-badge-u3jn4tfpocch.runkit.sh/ljharb/set-function-name
+[actions-image]: https://img.shields.io/github/check-runs/ljharb/set-function-name/main
 [actions-url]: https://github.com/ljharb/set-function-name/actions
